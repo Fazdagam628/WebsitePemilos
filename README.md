@@ -26,3 +26,4 @@
 ## Deployment & Testing
 1. Menyiapkan database (MySQL dan disambungkan dengan API ke Firebase)
 2. Melakukan testing fitur utama (login, voting, hasil voting)
+3. Deploy project ke server
