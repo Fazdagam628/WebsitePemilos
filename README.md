@@ -9,7 +9,7 @@
 6. Membuat sistem voting dengan validasi user (hanya user terdaftar yang bisa voting)
 7. Membuat validasi agar user hanya bisa voting satu kali (gunakan token)
 8. Berikan waktu voting yang terbatas (misal: 5 Menit)
-9. Membuat dashboard admin untuk memantau hasil voting secara real-time (opsional: grafik)
+9. Membuat dashboard admin untuk memantau hasil voting secara real-time (opsional: grafik atau bisa dicek juga penggunaan laravel pulse)
 10. Membuat fitur reset voting untuk admin dan user
 11. Membuat middleware agar hanya admin yang bisa mengakses halaman admin
 
