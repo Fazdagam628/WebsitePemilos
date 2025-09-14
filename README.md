@@ -5,7 +5,7 @@
 2. Membuat database untuk menyimpan data user, kandidat, dan hasil votings
 3. Buat role type dan role access admin dan user
 4. Membuat CRUD data kandidat pasangan Ketua & Wakil OSIS. Buat juga fitur upload foto kandidat
-5. Membuat Sistem Export data NISN dan Password User dari Excel ke Database
+5. Membuat Sistem import data NISN dan Password User dari Excel ke Database
 6. Membuat sistem voting dengan validasi user (hanya user terdaftar yang bisa voting)
 7. Membuat validasi agar user hanya bisa voting satu kali (gunakan token)
 8. Berikan waktu voting yang terbatas (misal: 5 Menit)
