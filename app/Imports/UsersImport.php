@@ -13,7 +13,9 @@ class UsersImport implements ToModel, WithHeadingRow
         return new User([
             'nis'      => $row['nis'],       // sesuai nama kolom di Excel
             'name'     => $row['name'],
-            'password' => bcrypt($row['password'])
+            'token'    => $row['token'],
+            'password' => bcrypt($row['password']),
+            
         ]);
     }
 }

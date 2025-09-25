@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nis')->unique();
             $table->string('name');
+            $table->string('token');
             $table->string('password');
             $table->boolean('is_admin')->default(false);
             $table->timestamps();

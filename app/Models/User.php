@@ -20,6 +20,7 @@ class User extends Authenticatable
         'nis',
         'name',
         'password',
+        'token',
         'is_admin',
     ];
 
@@ -38,12 +39,12 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-        ];
-    }
+    // protected function casts(): array
+    // {
+    //     return [
+    //         'password' => 'hashed',
+    //     ];
+    // }
     
     public function getAuthIdentifierName()
     {
