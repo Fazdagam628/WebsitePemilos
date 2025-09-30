@@ -1,1 +1,20 @@
-*.sqlite*
+# VSCode
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+*.code-workspace
+
+# Local History For VSC
+.history/
+
+# Common credential files
+**/credential.json
+**/client_secrets.json
+**/client_secrets.json
+**/client_secret.json
+
+# Read me
+**/readme.md
