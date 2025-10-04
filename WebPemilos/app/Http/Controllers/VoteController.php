@@ -83,7 +83,7 @@ class VoteController extends Controller
     {
         $candidates = Candidate::withCount('votes')->get();
 
-        $labels = $candidates->pluck('name');
+        $labels = $candidates->pluck('no_urut');
         $data = $candidates->pluck('votes_count');
 
         return response()->json([
@@ -94,6 +94,6 @@ class VoteController extends Controller
 
     public function results()
     {
-        return view('dashboard');
+        return view('admin.statistics');
     }
 }

@@ -28,7 +28,7 @@ class CandidateController extends Controller
             'leader_name' => 'required',
             'coleader_name' => 'required',
             'vision_mission' => 'required',
-            'no_urut' => 'required|integer|unique:candidates,number',
+            'no_urut' => 'required|integer|unique:candidates,no_urut',
             'candidate_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048' // foto optional
         ]);
 
@@ -54,7 +54,7 @@ class CandidateController extends Controller
             'leader_name' => 'required',
             'coleader_name' => 'required',
             'vision_mission' => 'required',
-            'no_urut' => 'required|integer|unique:candidates,number,' . $candidate->id,
+            'no_urut' => 'required|integer|unique:candidates,no_urut,' . $candidate->id,
             'candidate_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048' // foto optional
         ]);
 

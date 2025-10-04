@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
+
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,21 +25,29 @@ class AuthController extends Controller
 
         $user = User::where('nisn', $request->nisn)->first();
 
-        if ($user && Hash::check($request->token, $user->token)) {
-            Auth::login($user);
-
-            if ($user->id_admin) {
-                return redirect()->route('admin.dashboard');
-            } else {
-                return redirect()->route('vote.index');
-            }
+        if (!$user) {
+            return back()->withErrors(['nisn' => 'NISN tidak ditemukan.']);
         }
-            if (\App\Models\Vote::where('user_id', $user->id)->exist()) {
-                return back()->withErrors(['msg' => 'Anda sudah memberikan vote, login tidak diperbolehkan.']);
-            }
 
-        return back()->withErrors(['nisn' => 'Invalid credentials']);
+        // Bandingkan token secara langsung (plaintext)
+        if ($request->token !== $user->token) {
+            return back()->withErrors(['token' => 'Token tidak valid.']);
+        }
+
+        // Cegah login ulang jika sudah vote
+        if (\App\Models\Vote::where('user_id', $user->id)->exists()) {
+            return back()->withErrors(['msg' => 'Anda sudah memberikan vote, login tidak diperbolehkan.']);
+        }
+
+        // Login aman
+        Auth::login($user);
+
+        // Arahkan sesuai role
+        return $user->role === 'admin'
+            ? redirect()->route('admin.dashboard')
+            : redirect()->route('vote.index');
     }
+
 
     public function logout()
     {

@@ -11,37 +11,43 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
-   public function index()
-{
-    $candidates = Candidate::withCount('votes')->get();
-    $totalVotes = Vote::count();
+    public function index()
+    {
+        $candidates = Candidate::withCount('votes')->get();
+        $totalVotes = Vote::count();
 
-    // ✅ Ambil semua user yang sudah voting (1 user = 1 vote)
-    $votedUsers = User::with('vote')
-        ->whereHas('vote')
-        ->get();
+        // ✅ Ambil semua user yang sudah voting (1 user = 1 vote)
+        $votedUsers = User::with('votes')
+            ->whereHas('votes')
+            ->get();
 
-    return view('admin.dashboard', compact('candidates', 'totalVotes', 'votedUsers'));
-}
+        return view('admin.dashboard', compact('candidates', 'totalVotes', 'votedUsers'));
+    }
 
-//     public function statistics()
-//     {
-//         return view('admin.statistics');
-//     }
-//
-//     public function voteStats()
-//     {
-//         $candidates = Candidate::withCount('votes')->get(['id','name']);
-//         return response()->json([
-//             'labels' => $candidates->pluck('name'),
-//             'data'   => $candidates->pluck('votes_count')
-//         ]);
-//     }
+    //     public function statistics()
+    //     {
+    //         return view('admin.statistics');
+    //     }
+    //
+    //     public function voteStats()
+    //     {
+    //         $candidates = Candidate::withCount('votes')->get(['id','name']);
+    //         return response()->json([
+    //             'labels' => $candidates->pluck('name'),
+    //             'data'   => $candidates->pluck('votes_count')
+    //         ]);
+    //     }
 
     public function resetVotes()
     {
         // Hapus semua vote
         Vote::truncate();
+        // Reset semua user
+        User::query()->update([
+            'has_used' => 0,
+            'has_expired' => 0,
+            'expires_at' => null
+        ]);
         return back()->with('success', '✅ Semua voting berhasil direset.');
     }
 
@@ -50,8 +56,8 @@ class AdminController extends Controller
         $request->validate(['keyword' => 'required']);
 
         $user = User::where('id', $request->keyword)
-                    ->orWhere('name', 'like', '%' . $request->keyword . '%')
-                    ->first();
+            ->orWhere('nisn', 'like', '%' . $request->keyword . '%')
+            ->first();
 
         if (!$user) {
             return back()->with('error', '❌ User tidak ditemukan.');
@@ -59,8 +65,13 @@ class AdminController extends Controller
 
         // Hapus semua vote milik user
         Vote::where('user_id', $user->id)->delete();
+        // Reset used_at dan session
+        $user->has_used = 0;
+        $user->has_expired = 0;
+        $user->expires_at = null;
+        $user->save();
 
-        return back()->with('success', "✅ Voting user {$user->name} berhasil direset.");
+        return back()->with('success', "✅ Voting user {$user->nisn} berhasil direset.");
     }
 
     public function import(Request $request)
@@ -78,13 +89,33 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Data berhasil diimport!');
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nisn' => 'required|string|max:255',
+            // 'email' => 'required|email|unique:users,email',
+            // 'password' => 'required|string|min:6'
+            'token' => 'required|string|max:255',
+        ]);
+
+        User::create([
+            'nisn' => $request->nisn,
+            // 'email' => $request->email,
+            'role' => isset($request->role),
+            // 'password' => Hash::make($request->password),
+            'token' => $request->token,
+        ]);
+
+        return redirect()->back()->with('success', 'User berhasil ditambahkan!');
+    }
+
     public function searchUser(Request $request)
     {
         $keyword = $request->get('q');
         $users = User::where('id', $keyword)
-                    ->orWhere('name', 'like', "%{$keyword}%")
-                    ->limit(10)
-                    ->get(['id','name']);
+            ->orWhere('nisn', 'like', "%{$keyword}%")
+            ->limit(10)
+            ->get(['id', 'nisn']);
         return response()->json($users);
     }
 }
