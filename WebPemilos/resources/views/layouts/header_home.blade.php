@@ -91,7 +91,7 @@
 
 <header>
     <div class="logo">
-        <img src="Screenshot (16).png" alt="Logo">
+        <img src="SMK Logo.png" alt="Logo">
         <h1>PEMILOS 2025</h1>
     </div>
     <div class="btn">

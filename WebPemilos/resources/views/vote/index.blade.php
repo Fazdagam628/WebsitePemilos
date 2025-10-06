@@ -1,5 +1,15 @@
-@section('title','Vote')
-@section('content')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEMILOS 2025</title>
+  <link rel="stylesheet" href="../css/styleUser.css">
+  <style>
+    
+  </style>
+</head>
+<body>
 <h1>Voting Pemilos</h1>
 @if(session('success'))
 <p style="color:green;">{{ session('success') }}</p>
