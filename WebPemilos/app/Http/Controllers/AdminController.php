@@ -111,11 +111,28 @@ class AdminController extends Controller
 
     public function searchUser(Request $request)
     {
-        $keyword = $request->get('q');
-        $users = User::where('id', $keyword)
-            ->orWhere('nisn', 'like', "%{$keyword}%")
-            ->limit(10)
-            ->get(['id', 'nisn']);
-        return response()->json($users);
+        $keyword = $request->input('keyword');
+        $role = $request->route('role'); // Ambil role dari route default
+
+        $query = User::query()->where('role', $role);
+
+        if (!empty($keyword)) {
+            $query->where(function ($q) use ($keyword) {
+                $q->whereRaw('UPPER(username) LIKE ?', ['%' . strtoupper($keyword) . '%'])
+                    ->orWhereRaw('UPPER(nisn) LIKE ?', ['%' . strtoupper($keyword) . '%']);
+            });
+        }
+
+        $users = $query->get();
+
+        if ($role === 'guru') {
+            return view('admin.users.teachers', compact('users'))->with('teachers', $users);
+        }
+
+        if ($role === 'user') {
+            return view('admin.users.students', compact('users'))->with('students', $users);
+        }
+
+        return back()->with('error', 'Role tidak diketahui.');
     }
 }

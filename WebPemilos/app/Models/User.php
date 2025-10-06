@@ -15,6 +15,7 @@ class User extends Authenticatable
         'nisn',
         'token',
         'role',
+        'username',
         'has_used',
         'has_expired',
         'expires_at'

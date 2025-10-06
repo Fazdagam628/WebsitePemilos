@@ -15,7 +15,7 @@
 </script>
 @endif
 @if(session('success'))
-   <p> ("{{ session('success') }}")</p>
+<p> {{ session('success') }}</p>
 @endif
 @if($errors->any())
 <script>

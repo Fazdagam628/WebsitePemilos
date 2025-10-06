@@ -1,0 +1,37 @@
+/* import */
+.import-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 0 1rem;
+}
+
+.import-box {
+    background: white;
+    border: 2px dashed #800000;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.import-area {
+    cursor: pointer;
+}
+
+.import-box:hover {
+    background: #fff5f5;
+}
+
+.import-box p {
+    margin-top: 1rem;
+    color: #666;
+}
+
+#fileName {
+    color: #800000;
+    font-weight: bold;
+}

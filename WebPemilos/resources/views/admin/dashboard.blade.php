@@ -7,6 +7,9 @@
 
     <button><a href="{{ route('candidates.index') }}" class="btn btn-primary mb-3">👤 Kelola Kandidat</a></button>
     <button><a href="{{ route('admin.results') }}" class="btn btn-info mb-3">📈 Lihat Statistik Voting</a></button>
+    <button><a href="{{ route('users.students') }}" class="btn btn-info mb-3">Daftar siswa</a></button>
+    <button><a href="{{ route('users.teachers') }}" class="btn btn-info mb-3">Daftar Guru</a></button>
+    <button><a href="{{ route('users.importForm') }}" class="btn btn-info mb-3">upload File</a></button>
 
     <h3>Total Suara Masuk: {{ $totalVotes }}</h3>
 
@@ -81,42 +84,4 @@
     alert("{{ session('error') }}");
 </script>
 @endif
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(function() {
-        $('#keyword').on('input', function() {
-            let query = $(this).val();
-            if (query.length < 2) {
-                $('#user-list').empty();
-                return;
-            }
-            $.get('{{ route("admin.searchUser") }}', {
-                q: query
-            }, function(data) {
-                let list = '';
-                if (data.length === 0) {
-                    list = '<li class="list-group-item">User tidak ditemukan</li>';
-                } else {
-                    data.forEach(function(user) {
-                        list += `<li class="list-group-item user-item" data-id="${user.id}" data-nisn="${user.nisn}">${user.id} - ${user.nisn}</li>`;
-                    });
-                }
-                $('#user-list').html(list).show();
-            });
-        });
-
-        // Klik pada list
-        $(document).on('click', '.user-item', function() {
-            $('#keyword').val($(this).data('id'));
-            $('#user-list').empty();
-        });
-
-        // Sembunyikan list jika klik di luar
-        $(document).click(function(e) {
-            if (!$(e.target).closest('#keyword, #user-list').length) {
-                $('#user-list').empty();
-            }
-        });
-    });
-</script>
 @endsection

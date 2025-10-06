@@ -4,6 +4,21 @@
 @section('content')
 <div class="container">
     <h2>Daftar Guru</h2>
+    <form action="{{ route('admin.searchTeacher') }}" method="GET" id="filterForm" style="margin-bottom: 20px;">
+    <div class="hero-search game">
+        <div class="search-form d-flex align-items-center">
+            <i data-feather="search" class="search-icon me-2"></i>
+            <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="Cari Guru..." id="searchInput" autocomplete="off" class="form-control me-2">
+
+            <button type="submit" class="btn btn-primary btn-sm">Cari</button>
+
+            <!-- Tombol reset -->
+            <a href="{{ route('users.teachers') }}" class="btn btn-secondary btn-sm ms-2">Reset</a>
+        </div>
+    </div>
+</form>
+
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -48,7 +63,7 @@
                         @method('DELETE')
                         <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus akun ini?')">Hapus</button>
                     </form>
-                    <form action="{{ route('users.resetVote') }}" method="POST" style="display:inline;">
+                    <form action="{{ route('admin.resetUserVote') }}" method="POST" style="display:inline;">
                         @csrf
                         <input type="hidden" name="keyword" value="{{ $teacher->id }}">
                         <button class="btn btn-sm btn-warning" onclick="return confirm('Reset voting akun ini?')">Reset Vote</button>

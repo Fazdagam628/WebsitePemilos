@@ -1,0 +1,250 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background-color: #ffe6cd;
+    color: #800000;
+}
+
+/* Header */
+.header {
+    background-color: #800000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    flex-wrap: wrap;
+}
+
+.logo-wrapper {
+    background: white;
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.header h1 {
+    font-size: 2rem;
+    flex: 1;
+    text-align: center;
+}
+
+.btn-back {
+    background: white;
+    color: #800000;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Main Layout */
+.main-content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    gap: 2rem;
+    justify-content: center;
+}
+
+/* Info Panel */
+.info {
+    background-color: #800000;
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.info h2 {
+    color: #fffacd;
+    margin-bottom: 0.5rem;
+}
+
+.info-line {
+    width: 100px;
+    height: 5px;
+    background: #fffacd;
+    margin-bottom: 1.5rem;
+    border-radius: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    background-color: #e28989;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.info-item img {
+    width: 30px;
+    height: 30px;
+}
+
+.info-item p {
+    font-size: 1.1rem;
+}
+
+.info-item strong {
+    color: #fffacd;
+}
+
+/* Login Form */
+.login-form {
+    max-width: 600px;
+    width: 100%;
+}
+
+.form-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.avatar-circle {
+    background-color: #800000;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-circle img {
+    width: 60px;
+    height: 60px;
+}
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #800000;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.input-icon {
+    position: relative;
+}
+
+.input-icon img {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    opacity: 0.5;
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 3rem;
+    border-radius: 8px;
+    border: 1px solid #800000ad;
+    font-size: 1rem;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #800000;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.btn-login:hover {
+    opacity: 0.9;
+}
+
+.form-note {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #800000a0;
+}
+
+/* Footer */
+.footer {
+    flex-shrink: 0;
+    background-color: #800000;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .main-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-box,
+    .info {
+        max-width: 100%;
+    }
+}

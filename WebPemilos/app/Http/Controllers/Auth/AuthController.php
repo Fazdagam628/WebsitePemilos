@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Models\User;
+use App\Models\Candidate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function home()
+    {
+        $candidates = Candidate::get();
+        return view('auth.home',compact('candidates'));
+    }
     public function showLoginForm()
     {
         return view('auth.login');

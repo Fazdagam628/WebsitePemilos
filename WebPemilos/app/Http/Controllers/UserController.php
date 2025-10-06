@@ -15,13 +15,13 @@ class UserController extends Controller
     {
         // Asumsi kolom role berisi string 'user' untuk siswa
         $students = User::where('role', 'user')->get();
-        return view('users.students', compact('students'));
+        return view('admin.users.students', compact('students'));
     }
     public function teachers()
     {
         // Asumsi kolom role berisi string 'user' untuk siswa
         $teachers = User::where('role', 'guru')->get();
-        return view('users.teachers', compact('teachers'));
+        return view('admin.users.teachers', compact('teachers'));
     }
     public function resetVotes()
     {
@@ -57,6 +57,10 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('success', "✅ Voting user {$user->nisn} berhasil direset.");
+    }
+    public function userImport()
+    {
+        return view('admin.users.import');
     }
 
     public function import(Request $request)
@@ -99,8 +103,16 @@ class UserController extends Controller
         $keyword = $request->get('q');
         $users = User::where('id', $keyword)
             ->orWhere('nisn', 'like', "%{$keyword}%")
+            ->orWhere('username', 'like', "%{$keyword}%")
             ->limit(10)
-            ->get(['id', 'nisn']);
+            ->get(['id', 'nisn', 'username']);
         return response()->json($users);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'User berhasil dihapus!');
     }
 }

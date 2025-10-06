@@ -1,0 +1,362 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fbe8d3;
+    color: #333;
+}
+
+/* HEADER */
+.header {
+    background: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.header h1 {
+    font-size: 22px;
+    color: #800000;
+}
+
+.header p {
+    font-size: 14px;
+    color: #555;
+}
+
+.header-right .btn {
+    margin-left: 10px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn.tambah {
+    background: #a00000;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn.keluar {
+    background: #f6e58d;
+    color: #333;
+    text-decoration: none;
+}
+
+/* AREA KONTROL */
+.control-panel {
+    background: #fff;
+    margin: 1rem auto;
+    padding: 15px 20px;
+    border-radius: 12px;
+    max-width: 1000px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.switch-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.switch {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.murid {
+    background: #74b9ff;
+    color: #fff;
+}
+
+.guru {
+    background: #55efc4;
+    color: #fff;
+}
+
+.import {
+    background: #ffeaa7;
+    color: #333;
+}
+
+.switch.active {
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+.switch:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+
+.search-bar {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.search-bar .btn.search {
+    background: #f6e58d;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 1000px;
+    margin: 1rem auto;
+}
+
+.stat-box {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-info h2 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.stat-info p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Warna lingkaran lan angka */
+.stat-box.merah .icon-circle {
+    background: #d62828;
+}
+
+.stat-box.hijau .icon-circle {
+    background: #2ecc71;
+}
+
+.stat-box.oranye .icon-circle {
+    background: #e67e22;
+}
+
+.stat-box.biru .icon-circle {
+    background: #2980b9;
+}
+
+.stat-box.merah .stat-info p {
+    color: #d62828;
+}
+
+.stat-box.hijau .stat-info p {
+    color: #2ecc71;
+}
+
+.stat-box.oranye .stat-info p {
+    color: #e67e22;
+}
+
+.stat-box.biru .stat-info p {
+    color: #2980b9;
+}
+
+/* TABEL */
+.table-section {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 1rem auto;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+thead {
+    background: #fff;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background: #fff;
+}
+
+tr:nth-child(even) {
+    background: #fff;
+}
+
+/* STATUS */
+.status {
+    display: inline-block;
+    width: 20px;
+    height: 12px;
+    border-radius: 6px;
+}
+
+.status.aktif {
+    background: green;
+}
+
+.status.nonaktif {
+    background: gray;
+}
+
+.btn-reset {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-reset:hover {
+    background: #a93226;
+}
+
+/* Arrow */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 3rem;
+    gap: 8px;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    border: 1px solid #aaa;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background: #800000;
+    color: #fff;
+}
+
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .control-panel {
+        padding: 15px;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+}
+
+/* Button umum */
+.btn {
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-red {
+    background: #d62828;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.btn-red:hover {
+    background: #b71c1c;
+}
+
+.btn-green {
+    background: #2ecc71;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.btn-green:hover {
+    background: #27ae60;
+}
+
+.btn-yellow {
+    background: #f1c40f;
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.btn-yellow:hover {
+    background: #d4ac0d;
+}
+
+.btn-blue {
+    background: #2980b9;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.btn-blue:hover {
+    background: #21618c;
+}

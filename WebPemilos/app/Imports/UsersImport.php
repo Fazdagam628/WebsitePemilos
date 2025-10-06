@@ -20,21 +20,21 @@ class UsersImport implements ToModel, WithHeadingRow
         Log::info('Import row:', $row);
 
         return new User([
-            'name'     => $row['name'],   // kolom di Excel harus sesuai header
-            // 'email'    => $row['email'],
-            // 'password' => Hash::make($row['password']),
-            'token' => $row['token'],
-            'role' => $row['role'] ?? 'user',
+            'nisn'     => $row['nisn'],
+            'token'    => $row['token'],
+            'role'     => $row['role'] ?? 'user',
+            'username' => $row['username'] ?? 'User ' . $row['nisn'],
         ]);
     }
     public function rules(): array
     {
         return [
             // '*.email' => ['email', 'unique:users,email'],
-            '*.name'  => ['required'],
+            '*.nisn'  => ['required'],
             // '*.password' => ['required'],
             '*.token' => ['required'],
             '*.role' => ['required'],
+            '*.username' => ['required'],
         ];
     }
 }
