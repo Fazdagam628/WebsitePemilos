@@ -28,8 +28,8 @@
   width: 60px;
   height: 60px;
   margin-right: 15px;
-  border-radius: 50%;   
-  object-fit: cover;    
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 
@@ -243,7 +243,7 @@ button {
     color: white;
     text-align: center;
     padding: 2rem;
-    width: 100%;
+    /* width: auto; */
 }
 
 /* Responsiveness */

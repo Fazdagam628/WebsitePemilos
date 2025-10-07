@@ -76,8 +76,8 @@ body {
     border: none;
     font-weight: bold;
     cursor: pointer;
-    text-decoration:none;
-    font-size:14px;
+    text-decoration: none;
+    font-size: 14px;
 }
 
 .murid {
@@ -281,6 +281,19 @@ tr:nth-child(even) {
     color: #fff;
 }
 
+.pagination button {
+    padding: 6px 12px;
+    border: 1px solid #aaa;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background: #800000;
+    color: #fff;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .stats {
@@ -310,6 +323,17 @@ tr:nth-child(even) {
 }
 
 .btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+button {
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
     transform: translateY(-2px);
     opacity: 0.9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -361,99 +385,100 @@ tr:nth-child(even) {
 
 /* input */
 /* FORM CONTAINER */
-    .form-container {
-      background: #fff;
-      padding: 35px 40px;
-      border-radius: 14px;
-      margin: 50px auto;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 92%;
-      max-width: 950px;
-      margin-top: 150px;
-    }
+.form-container {
+    background: #fff;
+    padding: 35px 40px;
+    border-radius: 14px;
+    margin: 50px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 92%;
+    max-width: 950px;
+    margin-top: 150px;
+}
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px 35px;
-    }
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 35px;
+}
 
-    label {
-      font-weight: bold;
-      margin-bottom: 6px;
-      display: block;
-      color: #800000;
-    }
+label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    display: block;
+    color: #800000;
+}
 
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 6px;
-      border: 1px solid #a33;
-      font-size: 15px;
-      box-sizing: border-box;
-    }
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #a33;
+    font-size: 15px;
+    box-sizing: border-box;
+}
 
-    textarea {
-      min-height: 150px;
-      resize: none;
-    }
+textarea {
+    min-height: 150px;
+    resize: none;
+}
 
-    .btn-submit {
-      grid-column: span 2;
-      padding: 15px;
-      background-color: #8b0000;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+.btn-submit {
+    grid-column: span 2;
+    padding: 15px;
+    background-color: #8b0000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-    .btn-submit:hover {
-      background-color: #a10000;
-    }
+.btn-submit:hover {
+    background-color: #a10000;
+}
 
-    p.note {
-      grid-column: span 2;
-      text-align: center;
-      font-size: 13px;
-      margin-top: 6px;
-      color: #a33;
-    }
+p.note {
+    grid-column: span 2;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 6px;
+    color: #a33;
+}
 
-    /* FOOTER */
-    footer {
-      background-color: #8b0000;
-      color: white;
-      padding: 14px 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      margin-top: 100px;
-      height: 5.5dvh;
-    }
+/* FOOTER */
+footer {
+    background-color: #8b0000;
+    color: white;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 100px;
+    height: 5.5dvh;
+}
 
-    .footer-text {
-      font-weight: bold;
-      font-size: 15px;
-    }
+.footer-text {
+    font-weight: bold;
+    font-size: 15px;
+}
 
-    .footer-btn {
-      position: absolute;
-      right: 24px;
-      background: #fff;
-      color: #8b0000;
-      border: none;
-      padding: 7px 18px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.footer-btn {
+    position: absolute;
+    right: 24px;
+    background: #fff;
+    color: #8b0000;
+    border: none;
+    padding: 7px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-    .footer-btn:hover {
-      background: #f0f0f0;
-    }
+.footer-btn:hover {
+    background: #f0f0f0;
+}

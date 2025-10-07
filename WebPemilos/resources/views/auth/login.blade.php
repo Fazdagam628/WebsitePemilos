@@ -1,5 +1,16 @@
+<!DOCTYPE html>
+<html lang="id">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PEMILOS 2025 - Login Siswa</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body></body>
 @include('layouts.header_home')
+
 <!-- Main Content -->
 <main class="main-content">
     <!-- Informasi Penting -->
@@ -80,15 +91,38 @@
         </div>
     </section>
 </main>
+
+@include('layouts.footer_home')
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Session Alerts -->
 @if(session('success'))
 <script>
-    alert("{{ session('success') }}");
-</script>
-@endif
-@if($errors->any())
-<script>
-    alert("{{ $errors->first() }}");
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: `{{ session('success')}}`,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    });
 </script>
 @endif
 
-@include('layouts.footer_home')
+@if($errors->any())
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Terjadi Kesalahan',
+        text: '{{ $errors->first() }}',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Tutup'
+    });
+</script>
+@endif
+</body>
+
+</html>
+
+</html>

@@ -13,15 +13,37 @@ class UserController extends Controller
 
     public function students()
     {
+        // Hitung total pengguna dengan role user
+        $totalPemilih = User::where('role', 'user')->count();
+
+        // Hitung total suara (vote)
+        $totalSuara = \App\Models\Vote::count();
+
+        // Hitung jumlah siswa yang sudah memilih
+        $sudahMemilih = User::where('role', 'user')->where('has_used', 1)->count();
+
+        // Hitung siswa yang belum memilih
+        $belumMemilih = $totalPemilih - $sudahMemilih;
         // Asumsi kolom role berisi string 'user' untuk siswa
-        $students = User::where('role', 'user')->get();
-        return view('admin.users.students', compact('students'));
+        $students = User::where('role', 'user')->paginate(10);
+        return view('admin.users.students', compact('students', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'));
     }
     public function teachers()
     {
+        // Hitung total pengguna dengan role user
+        $totalPemilih = User::where('role', 'guru')->count();
+
+        // Hitung total suara (vote)
+        $totalSuara = \App\Models\Vote::count();
+
+        // Hitung jumlah siswa yang sudah memilih
+        $sudahMemilih = User::where('role', 'guru')->where('has_used', 1)->count();
+
+        // Hitung siswa yang belum memilih
+        $belumMemilih = $totalPemilih - $sudahMemilih;
         // Asumsi kolom role berisi string 'user' untuk siswa
-        $teachers = User::where('role', 'guru')->get();
-        return view('admin.users.teachers', compact('teachers'));
+        $teachers = User::where('role', 'guru')->paginate(10);
+        return view('admin.users.teachers', compact('teachers', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'));
     }
     public function resetVotes()
     {
@@ -98,16 +120,36 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User berhasil ditambahkan!');
     }
 
-    public function searchUser(Request $request)
+    public function searchUser(Request $request, $role)
     {
-        $keyword = $request->get('q');
-        $users = User::where('id', $keyword)
-            ->orWhere('nisn', 'like', "%{$keyword}%")
-            ->orWhere('username', 'like', "%{$keyword}%")
-            ->limit(10)
-            ->get(['id', 'nisn', 'username']);
-        return response()->json($users);
+        $keyword = $request->get('keyword');
+
+        $query = User::where('role', $role)
+            ->where(function ($q) use ($keyword) {
+                $q->where('nisn', 'like', "%{$keyword}%")
+                    ->orWhere('username', 'like', "%{$keyword}%")
+                    ->orWhere('id', $keyword);
+            });
+
+        $results = $query->paginate(10)->appends(['keyword' => $keyword]);
+
+        // --- Tambahkan blok statistik agar tidak error ---
+        $totalPemilih = User::where('role', $role)->count();
+        $totalSuara = \App\Models\Vote::count();
+        $sudahMemilih = User::where('role', $role)->where('has_used', 1)->count();
+        $belumMemilih = $totalPemilih - $sudahMemilih;
+        // --------------------------------------------------
+
+        if ($role === 'user') {
+            return view('admin.users.students', compact('results', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'))
+                ->with(['students' => $results]);
+        } else {
+            return view('admin.users.teachers', compact('results', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'))
+                ->with(['teachers' => $results]);
+        }
     }
+
+
 
     public function destroy($id)
     {

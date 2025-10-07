@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         // Arahkan sesuai role
         return $user->role === 'admin'
-            ? redirect()->route('admin.dashboard')
+            ? redirect()->route('users.students')
             : redirect()->route('vote.index');
     }
 

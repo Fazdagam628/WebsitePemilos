@@ -7,7 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CandidateController;
 
-Route::get('/', [AuthController::class,'home'])->name('home');
+Route::get('/', [AuthController::class, 'home'])->name('home');
 
 // Halaman awal diarahkan ke form login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -35,13 +35,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/users/import', [UserController::class, 'userImport'])->name('users.importForm');
     Route::post('/admin/reset-votes', [AdminController::class, 'resetVotes'])->name('admin.resetVotes');
     Route::post('/admin/reset-user', [AdminController::class, 'resetUserVote'])->name('admin.resetUserVote');
-    Route::get('/admin/search-teacher', [AdminController::class, 'searchUser'])
+    Route::get('/admin/search-student', [UserController::class, 'searchUser'])
+        ->name('admin.searchStudent')
+        ->defaults('role', 'user');
+
+    Route::get('/admin/search-teacher', [UserController::class, 'searchUser'])
         ->name('admin.searchTeacher')
         ->defaults('role', 'guru');
 
-    Route::get('/admin/search-student', [AdminController::class, 'searchUser'])
-        ->name('admin.searchStudent')
-        ->defaults('role', 'user');
 
 
     // CRUD kandidat

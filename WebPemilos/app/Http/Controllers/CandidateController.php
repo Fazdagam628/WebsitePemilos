@@ -24,22 +24,29 @@ class CandidateController extends Controller
     // Simpan kandidat baru
     public function store(Request $r)
     {
-        $data = $r->validate([
-            'leader_name' => 'required',
-            'coleader_name' => 'required',
-            'vision_mission' => 'required',
-            'no_urut' => 'required|integer|unique:candidates,no_urut',
-            'candidate_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048' // foto optional
-        ]);
+        try {
+            $data = $r->validate([
+                'leader_name' => 'required',
+                'coleader_name' => 'required',
+                'vision_mission' => 'required',
+                'no_urut' => 'required|integer|unique:candidates,no_urut',
+                'candidate_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            ]);
 
-        if ($r->hasFile('candidate_photo')) {
-            $data['candidate_photo'] = $r->file('candidate_photo')->store('candidates', 'public');
+            if ($r->hasFile('candidate_photo')) {
+                $data['candidate_photo'] = $r->file('candidate_photo')->store('candidates', 'public');
+            }
+
+            Candidate::create($data);
+
+            return redirect()->route('candidates.create')->with('success', 'Data calon OSIS berhasil ditambahkan!');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage());
         }
-
-        Candidate::create($data);
-
-        return redirect()->route('candidates.index')->with('success', 'Candidate created successfully!');
     }
+
 
     // Menampilkan form edit
     public function edit(Candidate $candidate)
@@ -69,7 +76,7 @@ class CandidateController extends Controller
         // Update kandidat
         $candidate->update($data);
 
-        return redirect()->route('candidates.index')->with('success', 'Candidate updated successfully!');
+        return redirect()->route('candidates.update')->with('success', 'Candidate updated successfully!');
     }
 
     // Hapus kandidat
