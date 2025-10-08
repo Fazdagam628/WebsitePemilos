@@ -32,7 +32,7 @@
             <a href="{{ route('users.import') }}" class="switch import" id="btnImport">Import Data</a>
 
         </div>
-        <form action="{{ route('admin.searchStudent') }}" method="GET" id="filterForm">
+        <form action="{{ route('admin.searchTeacher') }}" method="GET" id="filterForm">
             <div class="search-bar">
                 <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="Cari Guru..." id="searchInput" autocomplete="off">
                 <button type="submit" class="btn search">Search</button>
@@ -111,6 +111,7 @@
                     <th>Nama User</th>
                     <th>Token</th>
                     <th>Kode</th>
+                    <th>Role</th>
                     <th>Status Akun</th>
                     <th>Aksi</th>
                 </tr>
@@ -122,6 +123,7 @@
                     <td>{{ $teacher->username ?? '-' }}</td>
                     <td>{{ $teacher->token }}</td>
                     <td>{{ $teacher->nisn }}</td>
+                    <td>{{ $teacher->role }}</td>
                     <td>
                         @if ($teacher->has_used || $teacher->has_expired || $teacher->expires_at)
                         <span class="status nonaktif"></span>

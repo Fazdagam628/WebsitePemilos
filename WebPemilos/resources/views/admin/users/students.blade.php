@@ -111,6 +111,7 @@
                     <th>Nama User</th>
                     <th>Token</th>
                     <th>NISN</th>
+                    <th>Role</th>
                     <th>Status Akun</th>
                     <th>Aksi</th>
                 </tr>
@@ -122,6 +123,7 @@
                     <td>{{ $student->username ?? '-' }}</td>
                     <td>{{ $student->token }}</td>
                     <td>{{ $student->nisn }}</td>
+                    <td>{{ $student->role }}</td>
                     <td>
                         @if ($student->has_used || $student->has_expired || $student->expires_at)
                         <span class="status nonaktif"></span>
