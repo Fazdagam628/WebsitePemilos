@@ -25,7 +25,7 @@ class UserController extends Controller
         // Hitung siswa yang belum memilih
         $belumMemilih = $totalPemilih - $sudahMemilih;
         // Asumsi kolom role berisi string 'user' untuk siswa
-        $students = User::where('role', 'user')->paginate(10);
+        $students = User::where('role', 'user')->orderBy('username', 'asc')->paginate(100);
         return view('admin.users.students', compact('students', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'));
     }
     public function teachers()
@@ -42,7 +42,7 @@ class UserController extends Controller
         // Hitung siswa yang belum memilih
         $belumMemilih = $totalPemilih - $sudahMemilih;
         // Asumsi kolom role berisi string 'user' untuk siswa
-        $teachers = User::where('role', 'guru')->paginate(10);
+        $teachers = User::where('role', 'guru')->orderBy('username', 'asc')->paginate(100);
         return view('admin.users.teachers', compact('teachers', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'));
     }
     public function resetVotes()
@@ -131,7 +131,7 @@ class UserController extends Controller
                     ->orWhere('id', $keyword);
             });
 
-        $results = $query->paginate(10)->appends(['keyword' => $keyword]);
+        $results = $query->orderBy('username', 'asc')->paginate(100)->appends(['keyword' => $keyword]);
 
         // --- Tambahkan blok statistik agar tidak error ---
         $totalPemilih = User::where('role', $role)->count();

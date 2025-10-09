@@ -64,13 +64,13 @@
             <form method="POST" action="{{ route('login.submit') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="nama-lengkap">NISN</label>
+                    <label for="nama-lengkap">NIS</label>
                     <div class="input-icon">
                         <!-- Ikon user -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#800000" viewBox="0 0 24 24" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:0.5;">
                             <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zM4.8 20.4v-1.2c0-2.4 3.6-3.6 7.2-3.6s7.2 1.2 7.2 3.6v1.2H4.8z" />
                         </svg>
-                        <input type="text" name="nisn" id="nama-lengkap" placeholder="Masukkan NISN" required />
+                        <input type="text" name="nisn" id="nama-lengkap" placeholder="Masukkan NIS" required />
                     </div>
                 </div>
 

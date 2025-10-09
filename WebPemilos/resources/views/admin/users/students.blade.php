@@ -110,7 +110,7 @@
                     <th>No</th>
                     <th>Nama User</th>
                     <th>Token</th>
-                    <th>NISN</th>
+                    <th>NIS</th>
                     <th>Role</th>
                     <th>Status Akun</th>
                     <th>Aksi</th>
