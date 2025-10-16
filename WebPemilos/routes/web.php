@@ -16,8 +16,6 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/results', [VoteController::class, 'results'])->name('admin.results');
-Route::get('/results/data', [VoteController::class, 'stats'])->name('admin.getData');
 // 🔹 Semua user setelah login (guru & user)
 Route::middleware('auth')->group(function () {
     Route::get('/voting', [VoteController::class, 'index'])->name('vote.index');
@@ -26,6 +24,8 @@ Route::middleware('auth')->group(function () {
 
 // 🔹 Hanya admin
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/results', [VoteController::class, 'results'])->name('admin.results');
+    Route::get('/results/data', [VoteController::class, 'stats'])->name('admin.getData');
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/admin/users/students', [UserController::class, 'students'])->name('users.students');

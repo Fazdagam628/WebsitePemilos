@@ -112,7 +112,17 @@
                     <th>Token</th>
                     <th>Kode</th>
                     <th>Role</th>
-                    <th>Status Akun</th>
+                    <th>
+                        Status Akun <br>
+                        <form action="{{ route('admin.searchTeacher') }}" method="GET" id="filterFormStatus">
+                            <input type="hidden" name="keyword" value="{{ request('keyword') }}">
+                            <select name="status" onchange="document.getElementById('filterFormStatus').submit()" class="btn filter">
+                                <option value="">-- Semua --</option>
+                                <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                            </select>
+                        </form>
+                    </th>
                     <th>Aksi</th>
                 </tr>
             </thead>

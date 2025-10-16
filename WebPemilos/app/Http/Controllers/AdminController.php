@@ -56,7 +56,7 @@ class AdminController extends Controller
         $request->validate(['keyword' => 'required']);
 
         $user = User::where('id', $request->keyword)
-            ->orWhere('nisn', 'like', '%' . $request->keyword . '%')
+            // ->orWhere('nisn', 'like', '%' . $request->keyword . '%')
             ->first();
 
         if (!$user) {
@@ -71,7 +71,7 @@ class AdminController extends Controller
         $user->expires_at = null;
         $user->save();
 
-        return back()->with('success', "✅ Voting user {$user->nisn} berhasil direset.");
+        return back()->with('success', "✅ Voting user {$user->username} berhasil direset.");
     }
 
     public function import(Request $request)

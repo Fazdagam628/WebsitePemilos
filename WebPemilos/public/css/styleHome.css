@@ -243,7 +243,7 @@ button {
     color: white;
     text-align: center;
     padding: 2rem;
-    /* width: auto; */
+    width: 100%;
 }
 
 /* Responsiveness */

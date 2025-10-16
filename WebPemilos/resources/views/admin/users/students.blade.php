@@ -7,6 +7,14 @@
     <title>Dashboard Admin - Pemilos 2025</title>
     <link rel="stylesheet" href="../../css/style.css">
     <style>
+        .btn.filter {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            font-size: 0.9rem;
+        }
+
         /* FOOTER */
         .footer {
             flex-shrink: 0;
@@ -112,7 +120,18 @@
                     <th>Token</th>
                     <th>NIS</th>
                     <th>Role</th>
-                    <th>Status Akun</th>
+                    <th>
+                        Status Akun <br>
+                        <form action="{{ route('admin.searchStudent') }}" method="GET" id="filterFormStatus">
+                            <input type="hidden" name="keyword" value="{{ request('keyword') }}">
+                            <select name="status" onchange="document.getElementById('filterFormStatus').submit()" class="btn filter">
+                                <option value="">-- Semua --</option>
+                                <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                                <option value="nonaktif" {{ request('status') == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
+                            </select>
+                        </form>
+                    </th>
+
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -135,12 +154,12 @@
                         <form action="{{ route('users.destroy', $student->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="button"  class="btn-red btn-reset btn-delete">Hapus</button>
+                            <button type="button" class="btn-red btn-reset btn-delete">Hapus</button>
                         </form>
                         <form action="{{ route('admin.resetUserVote') }}" method="POST" style="display:inline;">
                             @csrf
                             <input type="hidden" name="keyword" value="{{ $student->id }}">
-                            <button type="button"  class="btn-red btn-reset btn-reset-vote">Reset Vote</button>
+                            <button type="button" class="btn-red btn-reset btn-reset-vote">Reset Vote</button>
                         </form>
                     </td>
                 </tr>

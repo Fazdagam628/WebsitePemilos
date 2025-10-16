@@ -63,7 +63,7 @@ class UserController extends Controller
         $request->validate(['keyword' => 'required']);
 
         $user = User::where('id', $request->keyword)
-            ->orWhere('nisn', 'like', '%' . $request->keyword . '%')
+            // ->orWhere('nisn', 'like', '%' . $request->keyword . '%')
             ->first();
 
         if (!$user) {
@@ -78,7 +78,7 @@ class UserController extends Controller
         $user->expires_at = null;
         $user->save();
 
-        return back()->with('success', "✅ Voting user {$user->nisn} berhasil direset.");
+        return back()->with('success', "✅ Voting user {$user->username} berhasil direset.");
     }
     public function userImport()
     {
@@ -123,31 +123,51 @@ class UserController extends Controller
     public function searchUser(Request $request, $role)
     {
         $keyword = $request->get('keyword');
+        $status = $request->get('status'); // ambil status dari query string
 
         $query = User::where('role', $role)
-            ->where(function ($q) use ($keyword) {
+            ->when($keyword, function ($q) use ($keyword) {
                 $q->where('nisn', 'like', "%{$keyword}%")
                     ->orWhere('username', 'like', "%{$keyword}%")
                     ->orWhere('id', $keyword);
             });
 
-        $results = $query->orderBy('username', 'asc')->paginate(100)->appends(['keyword' => $keyword]);
+        // === Filter Berdasarkan Status Akun ===
+        if ($status === 'aktif') {
+            $query->where(function ($q) {
+                $q->where('has_used', 0)
+                    ->where('has_expired', 0)
+                    ->whereNull('expires_at');
+            });
+        } elseif ($status === 'nonaktif') {
+            $query->where(function ($q) {
+                $q->where('has_used', 1)
+                    ->orWhere('has_expired', 1)
+                    ->orWhereNotNull('expires_at');
+            });
+        }
 
-        // --- Tambahkan blok statistik agar tidak error ---
+        $results = $query->orderBy('username', 'asc')
+            ->paginate(100)
+            ->appends(['keyword' => $keyword, 'status' => $status]);
+
+        // Statistik
         $totalPemilih = User::where('role', $role)->count();
         $totalSuara = \App\Models\Vote::count();
         $sudahMemilih = User::where('role', $role)->where('has_used', 1)->count();
         $belumMemilih = $totalPemilih - $sudahMemilih;
-        // --------------------------------------------------
 
+        // Return view sesuai role
         if ($role === 'user') {
             return view('admin.users.students', compact('results', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'))
-                ->with(['students' => $results]);
+                ->with(['students' => $results, 'status' => $status]);
         } else {
             return view('admin.users.teachers', compact('results', 'totalPemilih', 'totalSuara', 'sudahMemilih', 'belumMemilih'))
-                ->with(['teachers' => $results]);
+                ->with(['teachers' => $results, 'status' => $status]);
         }
     }
+
+
 
 
 

@@ -8,6 +8,7 @@ body {
     font-family: Arial, sans-serif;
     background: #fbe8d3;
     color: #333;
+
 }
 
 /* HEADER */
@@ -327,6 +328,7 @@ tr:nth-child(even) {
     opacity: 0.9;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
 button {
     cursor: pointer;
     border: none;
@@ -459,7 +461,8 @@ footer {
     align-items: center;
     position: relative;
     margin-top: 100px;
-    height: 5.5dvh;
+    width: 100%;
+
 }
 
 .footer-text {

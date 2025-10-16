@@ -14,7 +14,7 @@
     </div>
     <div class="btn">
         <a href="{{ route('home') }}" style=" text-decoration: none;"><button>Home</button></a>
-        <a href="{{ route('admin.results') }}" style=" text-decoration: none;"><button class="btn">Statistik</button></a>
+        <!-- <a href="{{ route('admin.results') }}" style=" text-decoration: none;"><button class="btn">Statistik</button></a> -->
         <a href="{{ route('login') }}" style=" text-decoration: none;"><button class="btn">Login</button></a>
     </div>
 </header>

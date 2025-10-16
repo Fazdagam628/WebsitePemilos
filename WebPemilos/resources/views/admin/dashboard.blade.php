@@ -50,12 +50,14 @@
         <tr>
             <th>ID</th>
             <th>Nama</th>
+            <th>NIS</th>
             <th>reset vote</th>
         </tr>
         @foreach($votedUsers as $user)
         <tr>
             <td>{{ $user->id }}</td>
-            <td>{{ $user->name }}</td>
+            <td>{{ $user->username }}</td>
+            <td>{{ $user->nisn }}</td>
             <td>
                 <form method="POST" action="{{ route('admin.resetUserVote') }}" style="display:inline;">
                     @csrf

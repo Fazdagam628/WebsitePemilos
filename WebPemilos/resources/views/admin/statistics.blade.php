@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    @include('layouts.header_home')
+    @include('layouts.header')
     <!-- CONTAINER -->
     <div class="container-statistik">
         <h2>Hasil Pemilihan</h2>

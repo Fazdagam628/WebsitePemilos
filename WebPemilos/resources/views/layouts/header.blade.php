@@ -41,6 +41,7 @@
     <div class="header-right">
         <a href="{{ route('users.students') }}" class="btn tambah">Dashboard</a>
         <a href="{{ route('candidates.create') }}" class="btn tambah">Tambah Paslon</a>
+        <a href="{{ route('admin.results') }}" class="btn tambah">Statistik</a>
         <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display: inline;">
             @csrf
             <a style="text-decoration: none;"><button type="button" class="btn keluar" id="logoutBtn">keluar</button></a>
